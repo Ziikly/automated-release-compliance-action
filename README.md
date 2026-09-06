@@ -2,6 +2,8 @@
 
 > Automated ISO 27001, SOC 2, and DORA compliance checks for your GitHub releases — with tamper-evident audit evidence.
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 Stop doing release compliance by hand. On every `release: [published]` event, this GitHub Action evaluates the release against a regulatory compliance checklist, writes a tamper-evident JSON audit report, and renders a pass/fail summary in the GitHub Actions UI — so you can prove a release was compliant at publish time.
 
 ---
@@ -25,6 +27,22 @@ Manually checking every release against ISO 27001, SOC 2, or DORA rules is slow,
 
 ---
 
+## Who this is for
+
+- **Teams preparing for an ISO 27001 or SOC 2 audit** who need to show that every
+  production release was reviewed, documented, and signed off — with evidence, not memory.
+- **Financial-sector teams under DORA** who must demonstrate risk and impact assessment
+  before a change reaches production.
+- **Platform and DevSecOps engineers** who want compliance-as-code in CI instead of a
+  spreadsheet someone updates the week before the audit.
+- **Anyone whose auditor asked "how do you know this release was compliant?"** and did not
+  have a machine-readable answer.
+
+It runs entirely inside GitHub Actions. No external service, no account, no data leaves
+your repository.
+
+---
+
 ## Quick start
 
 ```yaml
@@ -37,7 +55,7 @@ jobs:
   compliance:
     runs-on: ubuntu-latest
     steps:
-      - uses: etailory/automated-release-compliance-action@v1
+      - uses: Ziikly/automated-release-compliance-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           compliance-profile: iso27001
@@ -68,7 +86,7 @@ jobs:
       integrity-hash: ${{ steps.compliance.outputs.integrity-hash }}
     steps:
       - id: compliance
-        uses: etailory/automated-release-compliance-action@v1
+        uses: Ziikly/automated-release-compliance-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           compliance-profile: iso27001
@@ -241,4 +259,16 @@ LICENSE             MIT License
 
 ---
 
-Built by the team behind [Ziikly](https://ziikly.com) — a unified customer dashboard.
+## Who builds this
+
+Maintained by the team behind **[Ziikly](https://ziikly.com)** — an
+[MCP-native knowledge base](https://ziikly.com/knowledge-base) for engineering and AI teams.
+Ziikly connects your docs and your tools to AI agents over the Model Context Protocol, with
+read-only access throughout. It can also be
+[run on your own infrastructure](https://ziikly.com/self-hosting).
+
+The same instinct drives both projects: engineering evidence should be produced
+automatically and be verifiable after the fact, rather than reconstructed by hand when
+somebody asks.
+
+MIT licensed. Issues and pull requests welcome.
